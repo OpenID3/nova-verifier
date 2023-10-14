@@ -70,6 +70,14 @@ contract NovaVerifierContract {
     KeccakTranscriptLib.KeccakTranscript private transcriptPrimary;
     KeccakTranscriptLib.KeccakTranscript private transcriptSecondary;
 
+    // sha256 IV 
+    uint256[] z0_primary = [ 
+        0x18b307dad59bc1f83116a0d9fe4a708a5caff2a54ecf763ca175e6dde6679056, 
+        0x0000000000000000000000000000000000000000000000000000000000000002 
+    ];
+
+    uint256[] z0_secondary = [ 0x0, 0x0, 0x0 ];
+
     function initialize()
         private
         pure
@@ -108,7 +116,7 @@ contract NovaVerifierContract {
         vk = input;
     }
 
-    function verify(uint32 numSteps, uint256[] calldata z0_primary, uint256[] calldata z0_secondary, bool enableLogs)
+    function verify(uint32 numSteps, bool enableLogs)
         public
         returns (bool)
     {
